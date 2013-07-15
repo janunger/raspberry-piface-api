@@ -1,7 +1,6 @@
 <?php
+
 namespace Pkj\Raspberry\PiFace;
 
-
-class InitError extends \Exception {
-
-}
+class InitError extends \Exception
+{}

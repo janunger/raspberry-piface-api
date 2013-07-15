@@ -1,7 +1,6 @@
 <?php
+
 namespace Pkj\Raspberry\PiFace;
 
-
-class RangeError extends \Exception {
-	
-}
+class RangeError extends \Exception
+{}
