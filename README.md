@@ -5,7 +5,7 @@
 I ported the [original Python library](https://github.com/piface/pifacedigitalio) to PHP. This library works almost the same as the python library.
 
 
-	Warning, not tested, i don't own the PiFace just yet, i am waiting for my PiFace to arrive :)
+	Tested with Raspberry Pi hardware revision 000f (Rev. 2)
 	Converted from Python to PHP.
 
 
