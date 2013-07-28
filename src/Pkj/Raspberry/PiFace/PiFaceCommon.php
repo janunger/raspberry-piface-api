@@ -12,9 +12,6 @@ use Pkj\Raspberry\PiFace\SpiManager\SpiInterface;
  */
 class PiFaceCommon
 {
-    /**
-     * Constants from pifacecommon.py.
-     */
     const WRITE_CMD = 0;
     const READ_CMD = 1;
 
@@ -60,7 +57,6 @@ class PiFaceCommon
     const SPIDEV = '/dev/spidev';
 
     /**
-     * Spi Driver
      * @var \Pkj\Raspberry\PiFace\SpiManager\SpiInterface
      */
     private $spi;
@@ -71,7 +67,6 @@ class PiFaceCommon
     }
 
     /**
-     * Gets the SPI manager.
      * @return \Pkj\Raspberry\PiFace\SpiManager\SpiInterface
      */
     public function getSpi()
@@ -80,7 +75,10 @@ class PiFaceCommon
     }
 
     /**
-     * Translates a pin num to pin bit mask. First pin is pin0.
+     * Translates a pin number to pin bit mask
+     * Pin index is zero based, first pin number is 0
+     *
+     * @return int
      */
     public function getBitMask($bitNum)
     {
@@ -92,6 +90,8 @@ class PiFaceCommon
 
     /**
      * Returns the lowest pin num from a given bit pattern
+     *
+     * @return int
      */
     public function getBitNum($bitPattern)
     {
@@ -104,14 +104,17 @@ class PiFaceCommon
                 break;
             }
         }
+
         return $bitNum;
     }
 
     /**
      * Returns the bit specified from the address
-     * @param unknown_type $bitNum
-     * @param unknown_type $address
-     * @param unknown_type $boardNum
+     *
+     * @param int $bitNum
+     * @param int $address
+     * @param int $boardNum
+     * @return int
      */
     public function readBit($bitNum, $address, $boardNum = 0)
     {
@@ -122,7 +125,10 @@ class PiFaceCommon
     }
 
     /**
-     * Writes the value given to the bit specified
+     * @param int $value
+     * @param int $bitNum
+     * @param int $address
+     * @param int $boardNum
      */
     public function writeBit($value, $bitNum, $address, $boardNum)
     {
@@ -140,8 +146,10 @@ class PiFaceCommon
 
     /**
      * Returns the device opcode (as a byte)
-     * @param unknown_type $boardNum
-     * @param unknown_type $readWriteCmd
+     *
+     * @param int $boardNum
+     * @param int $readWriteCmd
+     * @return int
      */
     public function _getDeviceOpcode($boardNum, $readWriteCmd)
     {
@@ -154,9 +162,7 @@ class PiFaceCommon
     public function read($address, $boardNum = 0)
     {
         $devopcode = $this->_getDeviceOpcode($boardNum, self::READ_CMD);
-
         $packet = [$devopcode, $address, 0];
-
         list($op, $addr, $data) = $this->spi->transfer($packet);
 
         return $data;
@@ -164,14 +170,15 @@ class PiFaceCommon
 
     /**
      * Writes data to the address specified
-     * @param unknown_type $data
-     * @param unknown_type $address
-     * @param unknown_type $boardNum
+     *
+     * @param int $data
+     * @param int $address
+     * @param int $boardNum
+     * @return int[]
      */
     public function write($data, $address, $boardNum = 0)
     {
         $devopcode = $this->_getDeviceOpcode($boardNum, self::WRITE_CMD);
-
         $packet = [$devopcode, $address, $data];
 
         return $this->spi->transfer($packet);
