@@ -56,14 +56,15 @@ class PiFace
     private $switches = array();
 
     /**
+     * @param int $boardNumber
      * @return \Pkj\Raspberry\PiFace\PiFace
      */
-    public static function createInstance()
+    public static function createInstance($boardNumber = 0)
     {
         $spi = new SpiExtension(self::SPI_BUS, self::SPI_CHIP_SELECT);
         $common = new Driver($spi);
 
-        return new PiFace($common);
+        return new PiFace($common, $boardNumber);
     }
 
     /**
