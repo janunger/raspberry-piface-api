@@ -2,8 +2,8 @@
 
 namespace Pkj\Raspberry\PiFace\Components;
 
-use Pkj\Raspberry\PiFace\PiFaceCommon;
-use Pkj\Raspberry\PiFace\PiFaceDigital;
+use Pkj\Raspberry\PiFace\Driver;
+use Pkj\Raspberry\PiFace\PiFace;
 
 class OutputItem extends Item
 {
@@ -12,7 +12,7 @@ class OutputItem extends Item
      */
     public function getValue()
     {
-        return $this->handler->readBit($this->pinNum, PiFaceDigital::OUTPUT_PORT, $this->boardNum);
+        return $this->driver->readBit($this->pinNum, PiFace::OUTPUT_PORT, $this->boardNum);
     }
 
     /**
@@ -20,7 +20,7 @@ class OutputItem extends Item
      */
     public function setValue($data)
     {
-        $this->handler->writeBit($data, $this->pinNum, PiFaceDigital::OUTPUT_PORT, $this->boardNum);
+        $this->driver->writeBit($data, $this->pinNum, PiFace::OUTPUT_PORT, $this->boardNum);
     }
 
     public function turnOn()

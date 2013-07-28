@@ -2,23 +2,23 @@
 
 namespace Pkj\Raspberry\PiFace\Components;
 
-use Pkj\Raspberry\PiFace\PiFaceCommon;
-use Pkj\Raspberry\PiFace\PiFaceDigital;
-use Pkj\Raspberry\PiFace\OutOfRangeException;
+use Pkj\Raspberry\PiFace\Driver;
+use Pkj\Raspberry\PiFace\PiFace;
+use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
 class Relay extends OutputItem
 {
     /**
-     * @param PiFaceCommon $handler
+     * @param Driver $driver
      * @param int $relayNum
      * @param int $boardNum
-     * @throws \Pkj\Raspberry\PiFace\OutOfRangeException
+     * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(PiFaceCommon $handler, $relayNum, $boardNum = 0)
+    public function __construct(Driver $driver, $relayNum, $boardNum = 0)
     {
         if ($relayNum < 0 || $relayNum > 1) {
-            throw new OutOfRangeException(sprintf("Specified relay index (%d) out of range.", $relayNum));
+            throw new IndexOutOfRangeException(sprintf("Specified relay index (%d) out of range.", $relayNum));
         }
-        parent::__construct($handler, $relayNum, $boardNum);
+        parent::__construct($driver, $relayNum, $boardNum);
     }
 }

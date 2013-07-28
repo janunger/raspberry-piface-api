@@ -2,23 +2,23 @@
 
 namespace Pkj\Raspberry\PiFace\Components;
 
-use Pkj\Raspberry\PiFace\PiFaceCommon;
-use Pkj\Raspberry\PiFace\PiFaceDigital;
-use Pkj\Raspberry\PiFace\OutOfRangeException;
+use Pkj\Raspberry\PiFace\Driver;
+use Pkj\Raspberry\PiFace\PiFace;
+use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
 class SwitchItem extends InputItem
 {
     /**
-     * @param PiFaceCommon $handler
+     * @param Driver $driver
      * @param int $switchNum
      * @param int $boardNum
-     * @throws \Pkj\Raspberry\PiFace\OutOfRangeException
+     * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(PiFaceCommon $handler, $switchNum, $boardNum = 0)
+    public function __construct(Driver $driver, $switchNum, $boardNum = 0)
     {
         if ($switchNum < 0 || $switchNum > 3) {
-            throw new OutOfRangeException(sprintf("Specified switch index (%d) out of range.", $switchNum));
+            throw new IndexOutOfRangeException(sprintf("Specified switch index (%d) out of range.", $switchNum));
         }
-        parent::__construct($handler, $switchNum, $boardNum);
+        parent::__construct($driver, $switchNum, $boardNum);
     }
 }

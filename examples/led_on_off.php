@@ -1,16 +1,16 @@
 <?php
 
-use Pkj\Raspberry\PiFace\PiFaceCommon;
-use Pkj\Raspberry\PiFace\PiFaceDigital;
+use Pkj\Raspberry\PiFace\Driver;
+use Pkj\Raspberry\PiFace\PiFace;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 
 if (!class_exists('\Spi')) {
     die ("Spi extension must be installed (https://github.com/frak/php_spi)");
 }
 
-$dev = PiFaceDigital::createInstance();
+$dev = PiFace::createInstance();
 $dev->init();
 
 // Turn on the first led

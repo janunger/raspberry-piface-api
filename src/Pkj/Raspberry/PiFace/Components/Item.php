@@ -2,16 +2,16 @@
 
 namespace Pkj\Raspberry\PiFace\Components;
 
-use Pkj\Raspberry\PiFace\PiFaceCommon;
-use Pkj\Raspberry\PiFace\PiFaceDigital;
-use Pkj\Raspberry\PiFace\OutOfRangeException;
+use Pkj\Raspberry\PiFace\Driver;
+use Pkj\Raspberry\PiFace\PiFace;
+use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
 abstract class Item
 {
     /**
-     * @var \Pkj\Raspberry\PiFace\PiFaceCommon
+     * @var \Pkj\Raspberry\PiFace\Driver
      */
-    protected $handler;
+    protected $driver;
 
     /**
      * @var int
@@ -24,28 +24,20 @@ abstract class Item
     protected $boardNum;
 
     /**
-     * @param PiFaceCommon $handler
+     * @param Driver $driver
      * @param int $pinNum
      * @param int $boardNum
-     * @throws \Pkj\Raspberry\PiFace\OutOfRangeException
+     * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(PiFaceCommon $handler, $pinNum, $boardNum = 0)
+    public function __construct(Driver $driver, $pinNum, $boardNum = 0)
     {
-        $this->handler = $handler;
+        $this->driver = $driver;
 
-        if ($boardNum < 0 || $boardNum > PiFaceDigital::MAX_BOARDS) {
-            throw new OutOfRangeException(sprintf("Specified board index (%d) out of range.", $boardNum));
+        if ($boardNum < 0 || $boardNum > PiFace::MAX_BOARDS) {
+            throw new IndexOutOfRangeException(sprintf("Specified board index (%d) out of range.", $boardNum));
         }
 
         $this->boardNum = $boardNum;
         $this->pinNum = $pinNum;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return "PiFace Component: Board {$this->boardNum}, Pin {$this->pinNum}";
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-use Pkj\Raspberry\PiFace\PiFaceDigital;
+use Pkj\Raspberry\PiFace\PiFace;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 
-$pi = PiFaceDigital::createInstance();
+$pi = PiFace::createInstance();
 $pi->init();
 
 foreach ($pi->getInputPins() as $inputPin) {

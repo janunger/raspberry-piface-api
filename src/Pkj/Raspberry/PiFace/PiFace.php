@@ -9,11 +9,11 @@ use Pkj\Raspberry\PiFace\Components\Relay;
 use Pkj\Raspberry\PiFace\Components\SwitchItem;
 use Pkj\Raspberry\PiFace\SpiManager\SpiExtension;
 
-class PiFaceDigital
+class PiFace
 {
-    const OUTPUT_PORT = PiFaceCommon::GPIOA;
-    const INPUT_PORT = PiFaceCommon::GPIOB;
-    const INPUT_PULLUP = PiFaceCommon::GPPUB;
+    const OUTPUT_PORT = Driver::GPIOA;
+    const INPUT_PORT = Driver::GPIOB;
+    const INPUT_PULLUP = Driver::GPPUB;
     const MAX_BOARDS = 4;
 
     // /dev/spidev<bus>.<chipselect>
@@ -21,9 +21,9 @@ class PiFaceDigital
     const SPI_CHIP_SELECT = 0;
 
     /**
-     * @var PiFaceCommon
+     * @var Driver
      */
-    private $handler;
+    private $driver;
 
     /**
      * @var int
@@ -56,45 +56,45 @@ class PiFaceDigital
     private $switches = array();
 
     /**
-     * @return \Pkj\Raspberry\PiFace\PiFaceDigital
+     * @return \Pkj\Raspberry\PiFace\PiFace
      */
     public static function createInstance()
     {
         $spi = new SpiExtension(self::SPI_BUS, self::SPI_CHIP_SELECT);
-        $common = new PiFaceCommon($spi);
+        $common = new Driver($spi);
 
-        return new PiFaceDigital($common);
+        return new PiFace($common);
     }
 
     /**
      * Creates a new device
      *
-     * @param PiFaceCommon $handler
+     * @param Driver $driver
      * @param int $boardNumber
      */
-    public function __construct(PiFaceCommon $handler, $boardNumber = 0)
+    public function __construct(Driver $driver, $boardNumber = 0)
     {
-        $this->handler = $handler;
+        $this->driver = $driver;
         $this->boardNumber = $boardNumber;
 
         foreach (range(0, 7) as $pinNum) {
-            $this->inputPins[] = new InputItem($this->handler, ($pinNum), $this->boardNumber);
+            $this->inputPins[] = new InputItem($this->driver, ($pinNum), $this->boardNumber);
         }
 
         foreach (range(0, 7) as $pinNum) {
-            $this->outputPins[] = new OutputItem($this->handler, ($pinNum), $this->boardNumber);
+            $this->outputPins[] = new OutputItem($this->driver, ($pinNum), $this->boardNumber);
         }
 
         foreach (range(0, 7) as $pinNum) {
-            $this->leds[] = new LED($this->handler, ($pinNum), $this->boardNumber);
+            $this->leds[] = new LED($this->driver, ($pinNum), $this->boardNumber);
         }
 
         foreach (range(0, 1) as $pinNum) {
-            $this->relays[] = new Relay($this->handler, ($pinNum), $this->boardNumber);
+            $this->relays[] = new Relay($this->driver, ($pinNum), $this->boardNumber);
         }
 
         foreach (range(0, 3) as $pinNum) {
-            $this->switches[] = new SwitchItem($this->handler, ($pinNum), $this->boardNumber);
+            $this->switches[] = new SwitchItem($this->driver, ($pinNum), $this->boardNumber);
         }
     }
 
@@ -106,29 +106,29 @@ class PiFaceDigital
     public function init()
     {
         $ioconfig =
-            PiFaceCommon::BANK_OFF |
-            PiFaceCommon::INT_MIRROR_OFF |
-            PiFaceCommon::SEQOP_ON |
-            PiFaceCommon::DISSLW_OFF |
-            PiFaceCommon::HAEN_ON |
-            PiFaceCommon::ODR_OFF |
-            PiFaceCommon::INTPOL_LOW;
+            Driver::BANK_OFF |
+            Driver::INT_MIRROR_OFF |
+            Driver::SEQOP_ON |
+            Driver::DISSLW_OFF |
+            Driver::HAEN_ON |
+            Driver::ODR_OFF |
+            Driver::INTPOL_LOW;
 
         $pfdDetected = false;
 
         foreach (range(0, self::MAX_BOARDS) as $boardNumber) {
-            $this->handler->write($ioconfig, PiFaceCommon::IOCON, $boardNumber);
+            $this->driver->write($ioconfig, Driver::IOCON, $boardNumber);
 
             if (!$pfdDetected) {
-                if ($this->handler->read(PiFaceCommon::IOCON, $boardNumber) == $ioconfig) {
+                if ($this->driver->read(Driver::IOCON, $boardNumber) == $ioconfig) {
                     $pfdDetected = true;
                 }
             }
 
-            $this->handler->write(0, PiFaceCommon::GPIOA, $boardNumber);
-            $this->handler->write(0, PiFaceCommon::IODIRA, $boardNumber);
-            $this->handler->write(0xff, PiFaceCommon::IODIRB, $boardNumber);
-            $this->handler->write(0xff, PiFaceCommon::GPPUB, $boardNumber);
+            $this->driver->write(0, Driver::GPIOA, $boardNumber);
+            $this->driver->write(0, Driver::IODIRA, $boardNumber);
+            $this->driver->write(0xff, Driver::IODIRB, $boardNumber);
+            $this->driver->write(0xff, Driver::GPPUB, $boardNumber);
         }
 
         if (!$pfdDetected) {
@@ -174,10 +174,5 @@ class PiFaceDigital
     public function getSwitches()
     {
         return $this->switches;
-    }
-
-    public function getHandler()
-    {
-        return $this->handler;
     }
 }

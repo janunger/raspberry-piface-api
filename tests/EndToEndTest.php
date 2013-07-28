@@ -1,19 +1,19 @@
 <?php
 
-use Pkj\Raspberry\PiFace\PiFaceDigital;
+use Pkj\Raspberry\PiFace\PiFace;
 
 class EndToEndTest extends PHPUnit_Framework_TestCase
 {
     public function testEverything()
     {
-        $device = PiFaceDigital::createInstance();
+        $device = PiFace::createInstance();
         $device->init();
 
         foreach ($device->getRelays() as $relay) {
             $this->assertEquals(0, $relay->getValue());
             $relay->turnOn();
             $this->assertEquals(1, $relay->getValue());
-            usleep(300000);
+            usleep(200000);
             $relay->turnOff();
             $this->assertEquals(0, $relay->getValue());
             usleep(100000);
@@ -23,7 +23,7 @@ class EndToEndTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(0, $led->getValue());
             $led->turnOn();
             $this->assertEquals(1, $led->getValue());
-            usleep(300000);
+            usleep(200000);
             $led->turnOff();
             $this->assertEquals(0, $led->getValue());
             usleep(100000);
@@ -33,7 +33,7 @@ class EndToEndTest extends PHPUnit_Framework_TestCase
             $this->assertEquals(0, $outputPin->getValue());
             $outputPin->turnOn();
             $this->assertEquals(1, $outputPin->getValue());
-            usleep(300000);
+            usleep(200000);
             $outputPin->turnOff();
             $this->assertEquals(0, $outputPin->getValue());
             usleep(100000);

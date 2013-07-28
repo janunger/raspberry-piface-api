@@ -2,8 +2,8 @@
 
 namespace Pkj\Raspberry\PiFace\Components;
 
-use Pkj\Raspberry\PiFace\PiFaceCommon;
-use Pkj\Raspberry\PiFace\PiFaceDigital;
+use Pkj\Raspberry\PiFace\Driver;
+use Pkj\Raspberry\PiFace\PiFace;
 
 class InputItem extends Item
 {
@@ -12,6 +12,6 @@ class InputItem extends Item
      */
     public function getValue()
     {
-        return 1 ^ $this->handler->readBit($this->pinNum, PiFaceDigital::INPUT_PORT, $this->boardNum);
+        return 1 ^ $this->driver->readBit($this->pinNum, PiFace::INPUT_PORT, $this->boardNum);
     }
 }

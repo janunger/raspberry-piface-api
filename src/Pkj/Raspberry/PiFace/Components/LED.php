@@ -2,23 +2,23 @@
 
 namespace Pkj\Raspberry\PiFace\Components;
 
-use Pkj\Raspberry\PiFace\PiFaceCommon;
-use Pkj\Raspberry\PiFace\PiFaceDigital;
-use Pkj\Raspberry\PiFace\OutOfRangeException;
+use Pkj\Raspberry\PiFace\Driver;
+use Pkj\Raspberry\PiFace\PiFace;
+use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
 class LED extends OutputItem
 {
     /**
-     * @param PiFaceCommon $handler
+     * @param Driver $driver
      * @param int $ledNum
      * @param int $boardNum
-     * @throws \Pkj\Raspberry\PiFace\OutOfRangeException
+     * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(PiFaceCommon $handler, $ledNum, $boardNum = 0)
+    public function __construct(Driver $driver, $ledNum, $boardNum = 0)
     {
         if ($ledNum < 0 || $ledNum > 7) {
-            throw new OutOfRangeException(sprintf("Specified LED index (%d) out of range.", $ledNum));
+            throw new IndexOutOfRangeException(sprintf("Specified LED index (%d) out of range.", $ledNum));
         }
-        parent::__construct($handler, $ledNum, $boardNum);
+        parent::__construct($driver, $ledNum, $boardNum);
     }
 }

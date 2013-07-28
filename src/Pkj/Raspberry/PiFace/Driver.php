@@ -11,7 +11,7 @@ use Pkj\Raspberry\PiFace\SpiManager\SpiInterface;
  * Original python project:
  * https://github.com/piface/pifacecommon
  */
-class PiFaceCommon
+class Driver
 {
     const WRITE_CMD = 0;
     const READ_CMD = 1;
@@ -68,23 +68,17 @@ class PiFaceCommon
     }
 
     /**
-     * @return \Pkj\Raspberry\PiFace\SpiManager\SpiInterface
-     */
-    public function getSpi()
-    {
-        return $this->spi;
-    }
-
-    /**
      * Translates a pin number to pin bit mask
      * Pin index is zero based, first pin number is 0
      *
+     * @param int $bitNum
+     * @throws IndexOutOfRangeException
      * @return int
      */
     public function getBitMask($bitNum)
     {
         if ($bitNum > 7 || $bitNum < 0) {
-            throw new OutOfRangeException(sprintf("Specified bit num (%d) out of range (0-7).", $bitNum));
+            throw new IndexOutOfRangeException(sprintf("Specified bit num (%d) out of range (0-7).", $bitNum));
         }
         return 1 << ($bitNum);
     }
@@ -92,6 +86,7 @@ class PiFaceCommon
     /**
      * Returns the lowest pin num from a given bit pattern
      *
+     * @param int $bitPattern
      * @return int
      */
     public function getBitNum($bitPattern)
@@ -152,7 +147,7 @@ class PiFaceCommon
      * @param int $readWriteCmd
      * @return int
      */
-    public function _getDeviceOpcode($boardNum, $readWriteCmd)
+    public function getDeviceOpcode($boardNum, $readWriteCmd)
     {
         $boardAddrPattern = ($boardNum << 1) & 0xE; //  0b0010, 3 -> 0b0110
         $rwCmdPattern = $readWriteCmd & 1; // make sure it's just 1 bit long
@@ -162,8 +157,8 @@ class PiFaceCommon
 
     public function read($address, $boardNum = 0)
     {
-        $devopcode = $this->_getDeviceOpcode($boardNum, self::READ_CMD);
-        $packet = [$devopcode, $address, 0];
+        $deviceOpcode = $this->getDeviceOpcode($boardNum, self::READ_CMD);
+        $packet = [$deviceOpcode, $address, 0];
         list($op, $addr, $data) = $this->spi->transfer($packet);
 
         return $data;
@@ -179,7 +174,7 @@ class PiFaceCommon
      */
     public function write($data, $address, $boardNum = 0)
     {
-        $devopcode = $this->_getDeviceOpcode($boardNum, self::WRITE_CMD);
+        $devopcode = $this->getDeviceOpcode($boardNum, self::WRITE_CMD);
         $packet = [$devopcode, $address, $data];
 
         return $this->spi->transfer($packet);
