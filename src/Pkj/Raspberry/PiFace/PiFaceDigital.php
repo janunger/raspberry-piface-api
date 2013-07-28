@@ -2,35 +2,37 @@
 
 namespace Pkj\Raspberry\PiFace;
 
+use Pkj\Raspberry\PiFace\Components\InputItem;
+use Pkj\Raspberry\PiFace\Components\LED;
+use Pkj\Raspberry\PiFace\Components\OutputItem;
+use Pkj\Raspberry\PiFace\Components\Relay;
+use Pkj\Raspberry\PiFace\Components\SwitchItem;
 use Pkj\Raspberry\PiFace\SpiManager\SpiExtension;
-use Pkj\Raspberry\PiFace\Components as Component;
 
 class PiFaceDigital
 {
-    const
-        OUTPUT_PORT = PiFaceCommon::GPIOA,
-        INPUT_PORT = PiFaceCommon::GPIOB,
-        INPUT_PULLUP = PiFaceCommon::GPPUB,
-        MAX_BOARDS = 4;
+    const OUTPUT_PORT = PiFaceCommon::GPIOA;
+    const INPUT_PORT = PiFaceCommon::GPIOB;
+    const INPUT_PULLUP = PiFaceCommon::GPPUB;
+    const MAX_BOARDS = 4;
 
     // /dev/spidev<bus>.<chipselect>
-    const
-        SPI_BUS = 0,
-        SPI_CHIP_SELECT = 0;
+    const SPI_BUS = 0;
+    const SPI_CHIP_SELECT = 0;
 
     private $handler;
 
     private $boardNum;
 
-    private $inputPins = array(),
-        $outputPins = array(),
-        $leds = array(),
-        $relays = array(),
-        $switches = array();
+    private $inputPins = array();
+    private $outputPins = array();
+    private $leds = array();
+    private $relays = array();
+    private $switches = array();
 
     /**
      * Gets all the input pins.
-     * @return array|Component\InputItem[] Array of InputItem
+     * @return InputItem[] Array of InputItem
      */
     public function getInputPins()
     {
@@ -39,7 +41,7 @@ class PiFaceDigital
 
     /**
      * Gets all the output pins.
-     * @return array Array of OutputItem
+     * @return OutputItem[]
      */
     public function getOutputPins()
     {
@@ -48,7 +50,7 @@ class PiFaceDigital
 
     /**
      * Gets all the leds.
-     * @return array|Component\LED[] Array of LED
+     * @return LED[] Array of LED
      */
     public function getLeds()
     {
@@ -57,7 +59,7 @@ class PiFaceDigital
 
     /**
      * Gets all the relays.
-     * @return array|Component\Relay[] Array of Relay
+     * @return Relay[] Array of Relay
      */
     public function getRelays()
     {
@@ -66,7 +68,7 @@ class PiFaceDigital
 
     /**
      * Gets all the switches.
-     * @return array Array of SwitchItem
+     * @return SwitchItem[]
      */
     public function getSwitches()
     {
@@ -102,29 +104,29 @@ class PiFaceDigital
         // Ranges are +1 for pins.
 
         foreach (range(0, 7) as $pinNum) {
-            $this->inputPins[] = new Component\InputItem($this->handler, ($pinNum), $this->boardNum);
+            $this->inputPins[] = new InputItem($this->handler, ($pinNum), $this->boardNum);
         }
 
         foreach (range(0, 7) as $pinNum) {
-            $this->outputPins[] = new Component\OutputItem($this->handler, ($pinNum), $this->boardNum);
+            $this->outputPins[] = new OutputItem($this->handler, ($pinNum), $this->boardNum);
         }
 
         foreach (range(0, 7) as $pinNum) {
-            $this->leds[] = new Component\LED($this->handler, ($pinNum), $this->boardNum);
+            $this->leds[] = new LED($this->handler, ($pinNum), $this->boardNum);
         }
 
         foreach (range(0, 1) as $pinNum) {
-            $this->relays[] = new Component\Relay($this->handler, ($pinNum), $this->boardNum);
+            $this->relays[] = new Relay($this->handler, ($pinNum), $this->boardNum);
         }
 
         foreach (range(0, 3) as $pinNum) {
-            $this->switches[] = new Component\SwitchItem($this->handler, ($pinNum), $this->boardNum);
+            $this->switches[] = new SwitchItem($this->handler, ($pinNum), $this->boardNum);
         }
     }
 
     /**
      * Initialises the PiFace Digital board
-     * @param unknown_type $initBoard
+     * @param bool $initBoard
      * @throws \Exception
      */
     public function init($initBoard = true)

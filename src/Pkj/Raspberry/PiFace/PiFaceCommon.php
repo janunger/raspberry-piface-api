@@ -1,6 +1,7 @@
 <?php
 
 namespace Pkj\Raspberry\PiFace;
+use Pkj\Raspberry\PiFace\SpiManager\SpiInterface;
 
 /**
  * Provides common I/O methods for interfacing with PiFace Products
@@ -8,60 +9,55 @@ namespace Pkj\Raspberry\PiFace;
  *
  * Original python project:
  * https://github.com/piface/pifacecommon
- *
  */
-
-use Pkj\Raspberry\PiFace\SpiManager\SpiInterface;
-
 class PiFaceCommon
 {
     /**
      * Constants from pifacecommon.py.
      */
-    const
-        WRITE_CMD = 0,
-        READ_CMD = 1,
+    const WRITE_CMD = 0;
+    const READ_CMD = 1;
 
-        // Register addresses
-        IODIRA = 0x0, // I/O direction A
-        IODIRB = 0x1, // I/O direction B
-        IPOLA = 0x2, // I/O polarity A
-        IPOLB = 0x3, // I/O polarity B
-        GPINTENA = 0x4, // interupt enable A
-        GPINTENB = 0x5, // interupt enable B
-        DEFVALA = 0x6, // register default value A (interupts)
-        DEFVALB = 0x7, // register default value B (interupts)
-        INTCONA = 0x8, // interupt control A
-        INTCONB = 0x9, // interupt control B
-        IOCON = 0xA, // I/O config (also 0xB)
-        GPPUA = 0xC, // port A pullups
-        GPPUB = 0xD, // port B pullups
-        INTFA = 0xE, // interupt flag A (where the interupt came from)
-        INTFB = 0xF, // interupt flag B
-        INTCAPA = 0x10, // interupt capture A (value at interupt is saved here)
-        INTCAPB = 0x11, // interupt capture B
-        GPIOA = 0x12, // port A
-        GPIOB = 0x13, // port B
+    // Register addresses
+    const IODIRA = 0x0; // I/O direction A
+    const IODIRB = 0x1; // I/O direction B
+    const IPOLA = 0x2; // I/O polarity A
+    const IPOLB = 0x3; // I/O polarity B
+    const GPINTENA = 0x4; // interrupt enable A
+    const GPINTENB = 0x5; // interrupt enable B
+    const DEFVALA = 0x6; // register default value A (interrupts)
+    const DEFVALB = 0x7; // register default value B (interrupts)
+    const INTCONA = 0x8; // interrupt control A
+    const INTCONB = 0x9; // interrupt control B
+    const IOCON = 0xA; // I/O config (also 0xB)
+    const GPPUA = 0xC; // port A pullups
+    const GPPUB = 0xD; // port B pullups
+    const INTFA = 0xE; // interrupt flag A (where the interrupt came from)
+    const INTFB = 0xF; // interrupt flag B
+    const INTCAPA = 0x10; // interrupt capture A (value at interrupt is saved here)
+    const INTCAPB = 0x11; // interrupt capture B
+    const GPIOA = 0x12; // port A
+    const GPIOB = 0x13; // port B
 
-        // I/O config
-        BANK_OFF = 0x00, // addressing mode
-        BANK_ON = 0x80,
-        INT_MIRROR_ON = 0x40, // interupt mirror (INTa|INTb)
-        INT_MIRROR_OFF = 0x00,
-        SEQOP_OFF = 0x20, // incrementing address pointer
-        SEQOP_ON = 0x20,
-        DISSLW_ON = 0x10, // slew rate
-        DISSLW_OFF = 0x00,
-        HAEN_ON = 0x08, // hardware addressing
-        HAEN_OFF = 0x00,
-        ODR_ON = 0x04, // open drain for interupts
-        ODR_OFF = 0x00,
-        INTPOL_HIGH = 0x02, // interupt polarity
-        INTPOL_LOW = 0x00,
+    // I/O config
+    const BANK_OFF = 0x00; // addressing mode
+    const BANK_ON = 0x80;
+    const INT_MIRROR_ON = 0x40; // interrupt mirror (INTa|INTb)
+    const INT_MIRROR_OFF = 0x00;
+    const SEQOP_OFF = 0x20; // incrementing address pointer
+    const SEQOP_ON = 0x20;
+    const DISSLW_ON = 0x10; // slew rate
+    const DISSLW_OFF = 0x00;
+    const HAEN_ON = 0x08; // hardware addressing
+    const HAEN_OFF = 0x00;
+    const ODR_ON = 0x04; // open drain for interrupts
+    const ODR_OFF = 0x00;
+    const INTPOL_HIGH = 0x02; // interrupt polarity
+    const INTPOL_LOW = 0x00;
 
-        SPI_IOC_MAGIC = 107,
+    const SPI_IOC_MAGIC = 107;
 
-        SPIDEV = '/dev/spidev';
+    const SPIDEV = '/dev/spidev';
 
     /**
      * Spi Driver
