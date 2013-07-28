@@ -55,6 +55,9 @@ class Driver
 
     const SPI_IOC_MAGIC = 107;
 
+    // /dev/spidev<bus>.<chipselect>
+    const SPI_BUS = 0;
+    const SPI_CHIP_SELECT = 0;
     const SPIDEV = '/dev/spidev';
 
     /**
