@@ -16,10 +16,6 @@ class PiFace
     const INPUT_PULLUP = Driver::GPPUB;
     const MAX_BOARDS = 4;
 
-    // /dev/spidev<bus>.<chipselect>
-    const SPI_BUS = 0;
-    const SPI_CHIP_SELECT = 0;
-
     /**
      * @var Driver
      */
@@ -61,7 +57,7 @@ class PiFace
      */
     public static function createInstance($boardNumber = 0)
     {
-        $spi = new SpiExtension(self::SPI_BUS, self::SPI_CHIP_SELECT);
+        $spi = new SpiExtension(Driver::SPI_BUS, Driver::SPI_CHIP_SELECT);
         $common = new Driver($spi);
 
         return new PiFace($common, $boardNumber);
