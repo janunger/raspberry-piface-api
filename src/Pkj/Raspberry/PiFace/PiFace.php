@@ -68,30 +68,35 @@ class PiFace
      *
      * @param Driver $driver
      * @param int $boardNumber
+     * @throws IndexOutOfRangeException
      */
     public function __construct(Driver $driver, $boardNumber = 0)
     {
+        if ($boardNumber < 0 || $boardNumber > self::MAX_BOARDS - 1) {
+            throw new IndexOutOfRangeException("Specified board index ($boardNumber) out of range.");
+        }
+
         $this->driver = $driver;
         $this->boardNumber = $boardNumber;
 
-        foreach (range(0, 7) as $pinNum) {
-            $this->inputPins[] = new InputItem($this->driver, ($pinNum), $this->boardNumber);
+        foreach (range(0, 7) as $pinNumber) {
+            $this->inputPins[] = new InputItem($this->driver, ($pinNumber), $this->boardNumber);
         }
 
-        foreach (range(0, 7) as $pinNum) {
-            $this->outputPins[] = new OutputItem($this->driver, ($pinNum), $this->boardNumber);
+        foreach (range(0, 7) as $pinNumber) {
+            $this->outputPins[] = new OutputItem($this->driver, ($pinNumber), $this->boardNumber);
         }
 
-        foreach (range(0, 7) as $pinNum) {
-            $this->leds[] = new LED($this->driver, ($pinNum), $this->boardNumber);
+        foreach (range(0, 7) as $pinNumber) {
+            $this->leds[] = new LED($this->driver, ($pinNumber), $this->boardNumber);
         }
 
-        foreach (range(0, 1) as $pinNum) {
-            $this->relays[] = new Relay($this->driver, ($pinNum), $this->boardNumber);
+        foreach (range(0, 1) as $pinNumber) {
+            $this->relays[] = new Relay($this->driver, ($pinNumber), $this->boardNumber);
         }
 
-        foreach (range(0, 3) as $pinNum) {
-            $this->switches[] = new SwitchItem($this->driver, ($pinNum), $this->boardNumber);
+        foreach (range(0, 3) as $pinNumber) {
+            $this->switches[] = new SwitchItem($this->driver, ($pinNumber), $this->boardNumber);
         }
     }
 

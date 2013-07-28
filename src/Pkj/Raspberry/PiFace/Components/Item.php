@@ -32,11 +32,6 @@ abstract class Item
     public function __construct(Driver $driver, $pinNumber, $boardNumber = 0)
     {
         $this->driver = $driver;
-
-        if ($boardNumber < 0 || $boardNumber > PiFace::MAX_BOARDS) {
-            throw new IndexOutOfRangeException(sprintf("Specified board index (%d) out of range.", $boardNumber));
-        }
-
         $this->boardNumber = $boardNumber;
         $this->pinNumber = $pinNumber;
     }
