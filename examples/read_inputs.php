@@ -5,7 +5,7 @@ use Pkj\Raspberry\PiFace\PiFaceDigital;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 
-$pi = PiFaceDigital::create();
+$pi = PiFaceDigital::createInstance();
 $pi->init();
 
 foreach ($pi->getInputPins() as $inputPin) {

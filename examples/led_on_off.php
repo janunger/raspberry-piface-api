@@ -10,7 +10,7 @@ if (!class_exists('\Spi')) {
     die ("Spi extension must be installed (https://github.com/frak/php_spi)");
 }
 
-$dev = PiFaceDigital::create();
+$dev = PiFaceDigital::createInstance();
 $dev->init();
 
 // Turn on the first led

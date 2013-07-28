@@ -83,10 +83,11 @@ class PiFaceDigital
     /**
      * @return \Pkj\Raspberry\PiFace\PiFaceDigital
      */
-    static public function create()
+    static public function createInstance()
     {
         $spi = new SpiExtension(self::SPI_BUS, self::SPI_CHIP_SELECT);
         $common = new PiFaceCommon($spi);
+
         return new PiFaceDigital($common);
     }
 

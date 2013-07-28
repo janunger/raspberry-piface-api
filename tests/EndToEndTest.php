@@ -6,7 +6,7 @@ class EndToEndTest extends PHPUnit_Framework_TestCase
 {
     public function testEverything()
     {
-        $device = PiFaceDigital::create();
+        $device = PiFaceDigital::createInstance();
         $device->init();
 
         foreach ($device->getRelays() as $relay) {
