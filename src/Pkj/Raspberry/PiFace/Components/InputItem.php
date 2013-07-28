@@ -12,6 +12,6 @@ class InputItem extends Item
      */
     public function getValue()
     {
-        return 1 ^ $this->driver->readBit($this->pinNum, PiFace::INPUT_PORT, $this->boardNum);
+        return 1 ^ $this->driver->readBit($this->pinNumber, PiFace::INPUT_PORT, $this->boardNumber);
     }
 }

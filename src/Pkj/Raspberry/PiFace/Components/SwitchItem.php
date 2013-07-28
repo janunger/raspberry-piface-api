@@ -10,15 +10,15 @@ class SwitchItem extends InputItem
 {
     /**
      * @param Driver $driver
-     * @param int $switchNum
-     * @param int $boardNum
+     * @param int $switchNumber
+     * @param int $boardNumber
      * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(Driver $driver, $switchNum, $boardNum = 0)
+    public function __construct(Driver $driver, $switchNumber, $boardNumber = 0)
     {
-        if ($switchNum < 0 || $switchNum > 3) {
-            throw new IndexOutOfRangeException(sprintf("Specified switch index (%d) out of range.", $switchNum));
+        if ($switchNumber < 0 || $switchNumber > 3) {
+            throw new IndexOutOfRangeException(sprintf("Specified switch index (%d) out of range.", $switchNumber));
         }
-        parent::__construct($driver, $switchNum, $boardNum);
+        parent::__construct($driver, $switchNumber, $boardNumber);
     }
 }

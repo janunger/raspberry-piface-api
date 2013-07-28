@@ -16,28 +16,28 @@ abstract class Item
     /**
      * @var int
      */
-    protected $pinNum;
+    protected $pinNumber;
 
     /**
      * @var int
      */
-    protected $boardNum;
+    protected $boardNumber;
 
     /**
      * @param Driver $driver
-     * @param int $pinNum
-     * @param int $boardNum
+     * @param int $pinNumber
+     * @param int $boardNumber
      * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(Driver $driver, $pinNum, $boardNum = 0)
+    public function __construct(Driver $driver, $pinNumber, $boardNumber = 0)
     {
         $this->driver = $driver;
 
-        if ($boardNum < 0 || $boardNum > PiFace::MAX_BOARDS) {
-            throw new IndexOutOfRangeException(sprintf("Specified board index (%d) out of range.", $boardNum));
+        if ($boardNumber < 0 || $boardNumber > PiFace::MAX_BOARDS) {
+            throw new IndexOutOfRangeException(sprintf("Specified board index (%d) out of range.", $boardNumber));
         }
 
-        $this->boardNum = $boardNum;
-        $this->pinNum = $pinNum;
+        $this->boardNumber = $boardNumber;
+        $this->pinNumber = $pinNumber;
     }
 }

@@ -10,15 +10,15 @@ class LED extends OutputItem
 {
     /**
      * @param Driver $driver
-     * @param int $ledNum
-     * @param int $boardNum
+     * @param int $ledNumber
+     * @param int $boardNumber
      * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(Driver $driver, $ledNum, $boardNum = 0)
+    public function __construct(Driver $driver, $ledNumber, $boardNumber = 0)
     {
-        if ($ledNum < 0 || $ledNum > 7) {
-            throw new IndexOutOfRangeException(sprintf("Specified LED index (%d) out of range.", $ledNum));
+        if ($ledNumber < 0 || $ledNumber > 7) {
+            throw new IndexOutOfRangeException(sprintf("Specified LED index (%d) out of range.", $ledNumber));
         }
-        parent::__construct($driver, $ledNum, $boardNum);
+        parent::__construct($driver, $ledNumber, $boardNumber);
     }
 }

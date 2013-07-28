@@ -12,7 +12,7 @@ class OutputItem extends Item
      */
     public function getValue()
     {
-        return $this->driver->readBit($this->pinNum, PiFace::OUTPUT_PORT, $this->boardNum);
+        return $this->driver->readBit($this->pinNumber, PiFace::OUTPUT_PORT, $this->boardNumber);
     }
 
     /**
@@ -20,7 +20,7 @@ class OutputItem extends Item
      */
     public function setValue($data)
     {
-        $this->driver->writeBit($data, $this->pinNum, PiFace::OUTPUT_PORT, $this->boardNum);
+        $this->driver->writeBit($data, $this->pinNumber, PiFace::OUTPUT_PORT, $this->boardNumber);
     }
 
     public function turnOn()

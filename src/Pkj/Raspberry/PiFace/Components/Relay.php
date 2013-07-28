@@ -10,15 +10,15 @@ class Relay extends OutputItem
 {
     /**
      * @param Driver $driver
-     * @param int $relayNum
-     * @param int $boardNum
+     * @param int $relayNumber
+     * @param int $boardNumber
      * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(Driver $driver, $relayNum, $boardNum = 0)
+    public function __construct(Driver $driver, $relayNumber, $boardNumber = 0)
     {
-        if ($relayNum < 0 || $relayNum > 1) {
-            throw new IndexOutOfRangeException(sprintf("Specified relay index (%d) out of range.", $relayNum));
+        if ($relayNumber < 0 || $relayNumber > 1) {
+            throw new IndexOutOfRangeException(sprintf("Specified relay index (%d) out of range.", $relayNumber));
         }
-        parent::__construct($driver, $relayNum, $boardNum);
+        parent::__construct($driver, $relayNumber, $boardNumber);
     }
 }
