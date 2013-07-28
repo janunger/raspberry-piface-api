@@ -4,6 +4,9 @@ namespace Pkj\Raspberry\PiFace\SpiManager;
 
 class SpiExtension implements SpiInterface
 {
+    /**
+     * @var \Spi
+     */
     private $spi;
 
     public function __construct($bus, $chipselect, array $options = array())

@@ -1,6 +1,7 @@
 <?php
 
 namespace Pkj\Raspberry\PiFace;
+
 use Pkj\Raspberry\PiFace\SpiManager\SpiInterface;
 
 /**
@@ -83,7 +84,7 @@ class PiFaceCommon
     public function getBitMask($bitNum)
     {
         if ($bitNum > 7 || $bitNum < 0) {
-            throw new RangeError(sprintf("Specified bit num (%d) out of range (0-7).", $bitNum));
+            throw new OutOfRangeException(sprintf("Specified bit num (%d) out of range (0-7).", $bitNum));
         }
         return 1 << ($bitNum);
     }

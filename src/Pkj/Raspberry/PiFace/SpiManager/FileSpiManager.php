@@ -1,4 +1,5 @@
 <?php
+
 namespace Pkj\Raspberry\PiFace\SpiManager;
 
 class FileSpiManager implements SpiInterface

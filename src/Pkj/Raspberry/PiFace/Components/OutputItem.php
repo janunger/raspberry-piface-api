@@ -7,11 +7,17 @@ use Pkj\Raspberry\PiFace\PiFaceDigital;
 
 class OutputItem extends Item
 {
+    /**
+     * @return int
+     */
     public function getValue()
     {
         return $this->handler->readBit($this->pinNum, PiFaceDigital::OUTPUT_PORT, $this->boardNum);
     }
 
+    /**
+     * @param $data
+     */
     public function setValue($data)
     {
         $this->handler->writeBit($data, $this->pinNum, PiFaceDigital::OUTPUT_PORT, $this->boardNum);

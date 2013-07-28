@@ -7,6 +7,9 @@ use Pkj\Raspberry\PiFace\PiFaceDigital;
 
 class InputItem extends Item
 {
+    /**
+     * @return int
+     */
     public function getValue()
     {
         return 1 ^ $this->handler->readBit($this->pinNum, PiFaceDigital::INPUT_PORT, $this->boardNum);

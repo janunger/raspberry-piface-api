@@ -58,7 +58,7 @@ class PiFaceDigital
     /**
      * @return \Pkj\Raspberry\PiFace\PiFaceDigital
      */
-    static public function createInstance()
+    public static function createInstance()
     {
         $spi = new SpiExtension(self::SPI_BUS, self::SPI_CHIP_SELECT);
         $common = new PiFaceCommon($spi);
@@ -132,7 +132,7 @@ class PiFaceDigital
         }
 
         if (!$pfdDetected) {
-            throw new \Exception ("No PiFace board detected");
+            throw new InitException("No PiFace board detected");
         }
     }
 

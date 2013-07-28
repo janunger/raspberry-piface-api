@@ -26,7 +26,7 @@ class PiFaceCommonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Pkj\Raspberry\PiFace\RangeError
+     * @expectedException \Pkj\Raspberry\PiFace\OutOfRangeException
      */
     public function testGetBitMaskException()
     {

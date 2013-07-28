@@ -2,5 +2,5 @@
 
 namespace Pkj\Raspberry\PiFace;
 
-class RangeError extends \Exception
+class InitException extends \Exception
 {}
