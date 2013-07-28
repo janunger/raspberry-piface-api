@@ -12,6 +12,6 @@ class InputConnector extends Connector
      */
     public function getValue()
     {
-        return 1 ^ $this->driver->readBit($this->pinNumber, PiFace::INPUT_PORT, $this->boardNumber);
+        return 1 ^ $this->driver->readBit($this->pinIndex, PiFace::INPUT_PORT, $this->boardIndex);
     }
 }

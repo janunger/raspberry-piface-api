@@ -25,10 +25,10 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(4, $sut->getSwitches());
     }
 
-    public function testCanCreateInstancesForValidBoardNumbers()
+    public function testCanCreateInstancesForValidBoardIndexes()
     {
-        foreach (range(0, PiFace::MAX_BOARDS - 1) as $boardNumber) {
-            $sut = new PiFace($this->createDriverMock(), $boardNumber);
+        foreach (range(0, PiFace::MAX_BOARDS - 1) as $boardIndex) {
+            $sut = new PiFace($this->createDriverMock(), $boardIndex);
             $this->assertInstanceOf('Pkj\Raspberry\PiFace\PiFace', $sut);
         }
     }
@@ -36,7 +36,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function testThrowsExceptionOnBoardNumberTooHigh()
+    public function testThrowsExceptionOnBoardIndexTooHigh()
     {
         new PiFace($this->createDriverMock(), 4);
     }
@@ -44,7 +44,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function testThrowsExceptionOnBoardNumberTooLow()
+    public function testThrowsExceptionOnBoardIndexTooLow()
     {
         new PiFace($this->createDriverMock(), -1);
     }

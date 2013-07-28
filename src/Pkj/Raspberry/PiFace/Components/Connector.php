@@ -16,23 +16,23 @@ abstract class Connector
     /**
      * @var int
      */
-    protected $pinNumber;
+    protected $pinIndex;
 
     /**
      * @var int
      */
-    protected $boardNumber;
+    protected $boardIndex;
 
     /**
      * @param Driver $driver
-     * @param int $pinNumber
-     * @param int $boardNumber
+     * @param int $pinIndex
+     * @param int $boardIndex
      * @throws \Pkj\Raspberry\PiFace\IndexOutOfRangeException
      */
-    public function __construct(Driver $driver, $pinNumber, $boardNumber = 0)
+    public function __construct(Driver $driver, $pinIndex, $boardIndex = 0)
     {
         $this->driver = $driver;
-        $this->boardNumber = $boardNumber;
-        $this->pinNumber = $pinNumber;
+        $this->boardIndex = $boardIndex;
+        $this->pinIndex = $pinIndex;
     }
 }

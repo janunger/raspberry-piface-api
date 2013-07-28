@@ -12,7 +12,7 @@ class OutputConnector extends Connector
      */
     public function getValue()
     {
-        return $this->driver->readBit($this->pinNumber, PiFace::OUTPUT_PORT, $this->boardNumber);
+        return $this->driver->readBit($this->pinIndex, PiFace::OUTPUT_PORT, $this->boardIndex);
     }
 
     /**
@@ -20,7 +20,7 @@ class OutputConnector extends Connector
      */
     public function setValue($data)
     {
-        $this->driver->writeBit($data, $this->pinNumber, PiFace::OUTPUT_PORT, $this->boardNumber);
+        $this->driver->writeBit($data, $this->pinIndex, PiFace::OUTPUT_PORT, $this->boardIndex);
     }
 
     public function turnOn()

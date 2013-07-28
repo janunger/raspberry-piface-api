@@ -24,7 +24,7 @@ class PiFace
     /**
      * @var int
      */
-    private $boardNumber;
+    private $boardIndex;
 
     /**
      * @var InputConnector[]
@@ -52,51 +52,51 @@ class PiFace
     private $switches = array();
 
     /**
-     * @param int $boardNumber
+     * @param int $boardIndex
      * @return \Pkj\Raspberry\PiFace\PiFace
      */
-    public static function createInstance($boardNumber = 0)
+    public static function createInstance($boardIndex = 0)
     {
         $spi = new SpiExtension(Driver::SPI_BUS, Driver::SPI_CHIP_SELECT);
         $common = new Driver($spi);
 
-        return new PiFace($common, $boardNumber);
+        return new PiFace($common, $boardIndex);
     }
 
     /**
      * Creates a new device
      *
      * @param Driver $driver
-     * @param int $boardNumber
+     * @param int $boardIndex
      * @throws IndexOutOfRangeException
      */
-    public function __construct(Driver $driver, $boardNumber = 0)
+    public function __construct(Driver $driver, $boardIndex = 0)
     {
-        if ($boardNumber < 0 || $boardNumber > self::MAX_BOARDS - 1) {
-            throw new IndexOutOfRangeException("Specified board index ($boardNumber) out of range.");
+        if ($boardIndex < 0 || $boardIndex > self::MAX_BOARDS - 1) {
+            throw new IndexOutOfRangeException("Specified board index ($boardIndex) out of range.");
         }
 
         $this->driver = $driver;
-        $this->boardNumber = $boardNumber;
+        $this->boardIndex = $boardIndex;
 
-        foreach (range(0, 7) as $pinNumber) {
-            $this->inputPins[] = new InputConnector($this->driver, ($pinNumber), $this->boardNumber);
+        foreach (range(0, 7) as $pinIndex) {
+            $this->inputPins[] = new InputConnector($this->driver, ($pinIndex), $this->boardIndex);
         }
 
-        foreach (range(0, 7) as $pinNumber) {
-            $this->outputPins[] = new OutputConnector($this->driver, ($pinNumber), $this->boardNumber);
+        foreach (range(0, 7) as $pinIndex) {
+            $this->outputPins[] = new OutputConnector($this->driver, ($pinIndex), $this->boardIndex);
         }
 
-        foreach (range(0, 7) as $pinNumber) {
-            $this->leds[] = new LED($this->driver, ($pinNumber), $this->boardNumber);
+        foreach (range(0, 7) as $pinIndex) {
+            $this->leds[] = new LED($this->driver, ($pinIndex), $this->boardIndex);
         }
 
-        foreach (range(0, 1) as $pinNumber) {
-            $this->relays[] = new Relay($this->driver, ($pinNumber), $this->boardNumber);
+        foreach (range(0, 1) as $pinIndex) {
+            $this->relays[] = new Relay($this->driver, ($pinIndex), $this->boardIndex);
         }
 
-        foreach (range(0, 3) as $pinNumber) {
-            $this->switches[] = new SwitchItem($this->driver, ($pinNumber), $this->boardNumber);
+        foreach (range(0, 3) as $pinIndex) {
+            $this->switches[] = new SwitchItem($this->driver, ($pinIndex), $this->boardIndex);
         }
     }
 
@@ -118,19 +118,19 @@ class PiFace
 
         $pfdDetected = false;
 
-        foreach (range(0, self::MAX_BOARDS) as $boardNumber) {
-            $this->driver->write($ioconfig, Driver::IOCON, $boardNumber);
+        foreach (range(0, self::MAX_BOARDS) as $boardIndex) {
+            $this->driver->write($ioconfig, Driver::IOCON, $boardIndex);
 
             if (!$pfdDetected) {
-                if ($this->driver->read(Driver::IOCON, $boardNumber) == $ioconfig) {
+                if ($this->driver->read(Driver::IOCON, $boardIndex) == $ioconfig) {
                     $pfdDetected = true;
                 }
             }
 
-            $this->driver->write(0, Driver::GPIOA, $boardNumber);
-            $this->driver->write(0, Driver::IODIRA, $boardNumber);
-            $this->driver->write(0xff, Driver::IODIRB, $boardNumber);
-            $this->driver->write(0xff, Driver::GPPUB, $boardNumber);
+            $this->driver->write(0, Driver::GPIOA, $boardIndex);
+            $this->driver->write(0, Driver::IODIRA, $boardIndex);
+            $this->driver->write(0xff, Driver::IODIRB, $boardIndex);
+            $this->driver->write(0xff, Driver::GPPUB, $boardIndex);
         }
 
         if (!$pfdDetected) {
