@@ -6,7 +6,7 @@ use Pkj\Raspberry\PiFace\Driver;
 use Pkj\Raspberry\PiFace\PiFace;
 use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
-class Relay extends OutputItem
+class Relay extends OutputConnector
 {
     /**
      * @param Driver $driver

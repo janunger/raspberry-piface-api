@@ -6,7 +6,7 @@ use Pkj\Raspberry\PiFace\Driver;
 use Pkj\Raspberry\PiFace\PiFace;
 use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
-class SwitchItem extends InputItem
+class SwitchItem extends InputConnector
 {
     /**
      * @param Driver $driver

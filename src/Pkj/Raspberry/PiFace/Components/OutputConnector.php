@@ -5,7 +5,7 @@ namespace Pkj\Raspberry\PiFace\Components;
 use Pkj\Raspberry\PiFace\Driver;
 use Pkj\Raspberry\PiFace\PiFace;
 
-class OutputItem extends Item
+class OutputConnector extends Connector
 {
     /**
      * @return int

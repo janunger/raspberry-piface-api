@@ -2,9 +2,9 @@
 
 namespace Pkj\Raspberry\PiFace;
 
-use Pkj\Raspberry\PiFace\Components\InputItem;
+use Pkj\Raspberry\PiFace\Components\InputConnector;
 use Pkj\Raspberry\PiFace\Components\LED;
-use Pkj\Raspberry\PiFace\Components\OutputItem;
+use Pkj\Raspberry\PiFace\Components\OutputConnector;
 use Pkj\Raspberry\PiFace\Components\Relay;
 use Pkj\Raspberry\PiFace\Components\SwitchItem;
 use Pkj\Raspberry\PiFace\SpiManager\SpiExtension;
@@ -27,12 +27,12 @@ class PiFace
     private $boardNumber;
 
     /**
-     * @var InputItem[]
+     * @var InputConnector[]
      */
     private $inputPins = array();
 
     /**
-     * @var OutputItem[]
+     * @var OutputConnector[]
      */
     private $outputPins = array();
 
@@ -80,11 +80,11 @@ class PiFace
         $this->boardNumber = $boardNumber;
 
         foreach (range(0, 7) as $pinNumber) {
-            $this->inputPins[] = new InputItem($this->driver, ($pinNumber), $this->boardNumber);
+            $this->inputPins[] = new InputConnector($this->driver, ($pinNumber), $this->boardNumber);
         }
 
         foreach (range(0, 7) as $pinNumber) {
-            $this->outputPins[] = new OutputItem($this->driver, ($pinNumber), $this->boardNumber);
+            $this->outputPins[] = new OutputConnector($this->driver, ($pinNumber), $this->boardNumber);
         }
 
         foreach (range(0, 7) as $pinNumber) {
@@ -139,7 +139,7 @@ class PiFace
     }
 
     /**
-     * @return InputItem[]
+     * @return InputConnector[]
      */
     public function getInputPins()
     {
@@ -147,7 +147,7 @@ class PiFace
     }
 
     /**
-     * @return OutputItem[]
+     * @return OutputConnector[]
      */
     public function getOutputPins()
     {

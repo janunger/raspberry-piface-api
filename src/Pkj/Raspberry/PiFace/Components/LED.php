@@ -6,7 +6,7 @@ use Pkj\Raspberry\PiFace\Driver;
 use Pkj\Raspberry\PiFace\PiFace;
 use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
-class LED extends OutputItem
+class LED extends OutputConnector
 {
     /**
      * @param Driver $driver
