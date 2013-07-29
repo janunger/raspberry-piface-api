@@ -6,7 +6,7 @@ use Pkj\Raspberry\PiFace\Driver;
 use Pkj\Raspberry\PiFace\PiFace;
 use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 
-abstract class Connector
+abstract class Pin
 {
     /**
      * @var \Pkj\Raspberry\PiFace\Driver

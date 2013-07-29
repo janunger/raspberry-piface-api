@@ -2,11 +2,8 @@
 
 namespace Pkj\Raspberry\PiFace;
 
-use Pkj\Raspberry\PiFace\Components\InputConnector;
-use Pkj\Raspberry\PiFace\Components\LED;
-use Pkj\Raspberry\PiFace\Components\OutputConnector;
-use Pkj\Raspberry\PiFace\Components\Relay;
-use Pkj\Raspberry\PiFace\Components\SwitchItem;
+use Pkj\Raspberry\PiFace\Components\InputPin;
+use Pkj\Raspberry\PiFace\Components\OutputPin;
 use Pkj\Raspberry\PiFace\SpiManager\SpiExtension;
 
 class PiFace
@@ -27,27 +24,22 @@ class PiFace
     private $boardIndex;
 
     /**
-     * @var InputConnector[]
+     * @var InputPin[]
      */
     private $inputPins = array();
 
     /**
-     * @var OutputConnector[]
+     * @var OutputPin[]
      */
     private $outputPins = array();
 
     /**
-     * @var LED[]
-     */
-    private $leds = array();
-
-    /**
-     * @var Relay[]
+     * @var OutputPin[]
      */
     private $relays = array();
 
     /**
-     * @var SwitchItem[]
+     * @var InputPin[]
      */
     private $switches = array();
 
@@ -80,24 +72,15 @@ class PiFace
         $this->boardIndex = $boardIndex;
 
         foreach (range(0, 7) as $pinIndex) {
-            $this->inputPins[] = new InputConnector($this->driver, ($pinIndex), $this->boardIndex);
+            $this->inputPins[] = new InputPin($this->driver, $pinIndex, $this->boardIndex);
         }
 
         foreach (range(0, 7) as $pinIndex) {
-            $this->outputPins[] = new OutputConnector($this->driver, ($pinIndex), $this->boardIndex);
+            $this->outputPins[] = new OutputPin($this->driver, $pinIndex, $this->boardIndex);
         }
 
-        foreach (range(0, 7) as $pinIndex) {
-            $this->leds[] = new LED($this->driver, ($pinIndex), $this->boardIndex);
-        }
-
-        foreach (range(0, 1) as $pinIndex) {
-            $this->relays[] = new Relay($this->driver, ($pinIndex), $this->boardIndex);
-        }
-
-        foreach (range(0, 3) as $pinIndex) {
-            $this->switches[] = new SwitchItem($this->driver, ($pinIndex), $this->boardIndex);
-        }
+        $this->relays = array_slice($this->outputPins, 0, 2);
+        $this->switches = array_slice($this->inputPins, 0, 4);
     }
 
     /**
@@ -139,7 +122,7 @@ class PiFace
     }
 
     /**
-     * @return InputConnector[]
+     * @return InputPin[]
      */
     public function getInputPins()
     {
@@ -147,7 +130,7 @@ class PiFace
     }
 
     /**
-     * @return OutputConnector[]
+     * @return OutputPin[]
      */
     public function getOutputPins()
     {
@@ -155,15 +138,7 @@ class PiFace
     }
 
     /**
-     * @return LED[]
-     */
-    public function getLeds()
-    {
-        return $this->leds;
-    }
-
-    /**
-     * @return Relay[]
+     * @return OutputPin[]
      */
     public function getRelays()
     {
@@ -171,7 +146,7 @@ class PiFace
     }
 
     /**
-     * @return SwitchItem[]
+     * @return InputPin[]
      */
     public function getSwitches()
     {

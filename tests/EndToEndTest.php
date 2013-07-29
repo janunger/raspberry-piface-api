@@ -10,41 +10,31 @@ class EndToEndTest extends PHPUnit_Framework_TestCase
         $device->init();
 
         foreach ($device->getRelays() as $relay) {
-            $this->assertEquals(0, $relay->getValue());
+            $this->assertFalse($relay->isOn());
             $relay->turnOn();
-            $this->assertEquals(1, $relay->getValue());
+            $this->assertTrue($relay->isOn());
             usleep(200000);
             $relay->turnOff();
-            $this->assertEquals(0, $relay->getValue());
-            usleep(100000);
-        }
-
-        foreach ($device->getLeds() as $led) {
-            $this->assertEquals(0, $led->getValue());
-            $led->turnOn();
-            $this->assertEquals(1, $led->getValue());
-            usleep(200000);
-            $led->turnOff();
-            $this->assertEquals(0, $led->getValue());
+            $this->assertFalse($relay->isOn());
             usleep(100000);
         }
 
         foreach ($device->getOutputPins() as $outputPin) {
-            $this->assertEquals(0, $outputPin->getValue());
+            $this->assertFalse($outputPin->isOn());
             $outputPin->turnOn();
-            $this->assertEquals(1, $outputPin->getValue());
+            $this->assertTrue($outputPin->isOn());
             usleep(200000);
             $outputPin->turnOff();
-            $this->assertEquals(0, $outputPin->getValue());
+            $this->assertFalse($outputPin->isOn());
             usleep(100000);
         }
 
         foreach ($device->getInputPins() as $inputPin) {
-            $this->assertEquals(0, $inputPin->getValue());
+            $this->assertFalse($inputPin->isOn());
         }
-        
+
         foreach ($device->getSwitches() as $switch) {
-            $this->assertEquals(0, $switch->getValue());
+            $this->assertFalse($switch->isOn());
         }
     }
 }

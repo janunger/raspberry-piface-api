@@ -10,8 +10,8 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     private function createDriverMock()
     {
         $spi = $this->getMock('Pkj\Raspberry\PiFace\SpiManager\SpiInterface');
-        $driver = new Driver($spi);
-        return $driver;
+
+        return new Driver($spi);
     }
 
     public function testBoardHasExactMatchOfComponents()
@@ -20,7 +20,6 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(8, $sut->getInputPins());
         $this->assertCount(8, $sut->getOutputPins());
-        $this->assertCount(8, $sut->getLeds());
         $this->assertCount(2, $sut->getRelays());
         $this->assertCount(4, $sut->getSwitches());
     }
