@@ -130,11 +130,39 @@ class PiFace
     }
 
     /**
+     * @param int $index
+     * @return InputPin
+     * @throws IndexOutOfRangeException
+     */
+    public function getInputPin($index)
+    {
+        if (!isset($this->inputPins[$index])) {
+            throw new IndexOutOfRangeException("No input pin by index ($index)");
+        }
+
+        return $this->inputPins[$index];
+    }
+
+    /**
      * @return OutputPin[]
      */
     public function getOutputPins()
     {
         return $this->outputPins;
+    }
+
+    /**
+     * @param int $index
+     * @return OutputPin
+     * @throws IndexOutOfRangeException
+     */
+    public function getOutputPin($index)
+    {
+        if (!isset($this->outputPins[$index])) {
+            throw new IndexOutOfRangeException("No output pin by index ($index)");
+        }
+
+        return $this->outputPins[$index];
     }
 
     /**
@@ -146,10 +174,38 @@ class PiFace
     }
 
     /**
+     * @param int $index
+     * @return OutputPin
+     * @throws IndexOutOfRangeException
+     */
+    public function getRelay($index)
+    {
+        if (!isset($this->relays[$index])) {
+            throw new IndexOutOfRangeException("No relay by index ($index)");
+        }
+
+        return $this->relays[$index];
+    }
+
+    /**
      * @return InputPin[]
      */
     public function getSwitches()
     {
         return $this->switches;
+    }
+
+    /**
+     * @param int $index
+     * @return InputPin
+     * @throws IndexOutOfRangeException
+     */
+    public function getSwitch($index)
+    {
+        if (!isset($this->switches[$index])) {
+            throw new IndexOutOfRangeException("No switch by index ($index)");
+        }
+
+        return $this->switches[$index];
     }
 }
