@@ -118,7 +118,7 @@ class PiFace
 
         $pfdDetected = false;
 
-        foreach (range(0, self::MAX_BOARDS) as $boardIndex) {
+        foreach (range(0, self::MAX_BOARDS - 1) as $boardIndex) {
             $this->driver->write($ioconfig, Driver::IOCON, $boardIndex);
 
             if (!$pfdDetected) {
