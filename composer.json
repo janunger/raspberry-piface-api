@@ -10,6 +10,12 @@
             "email": "kjelkenes@gmail.com",
             "homepage": "http://pkj.no",
             "role": "Developer"
+        },
+        {
+            "name": "Jan Unger",
+            "email": "ju@juit.de",
+            "homepage": "http://www.juit.de",
+            "role": "Developer"
         }
     ],
     "autoload": {
