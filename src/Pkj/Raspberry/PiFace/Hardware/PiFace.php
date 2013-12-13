@@ -30,12 +30,12 @@ class PiFace implements \Pkj\Raspberry\PiFace
     private $inputPins = array();
 
     /**
-     * @var OutputPin[]
+     * @var \Pkj\Raspberry\PiFace\OutputPin[]
      */
     private $outputPins = array();
 
     /**
-     * @var OutputPin[]
+     * @var \Pkj\Raspberry\PiFace\OutputPin[]
      */
     private $relays = array();
 
@@ -145,7 +145,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
     }
 
     /**
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin[]
+     * @return \Pkj\Raspberry\PiFace\OutputPin[]
      */
     public function getOutputPins()
     {
@@ -154,7 +154,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
 
     /**
      * @param int $index
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin
+     * @return \Pkj\Raspberry\PiFace\OutputPin
      * @throws IndexOutOfRangeException
      */
     public function getOutputPin($index)
@@ -167,7 +167,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
     }
 
     /**
-     * @return OutputPin[]
+     * @return \Pkj\Raspberry\PiFace\OutputPin[]
      */
     public function getRelays()
     {
@@ -176,7 +176,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
 
     /**
      * @param int $index
-     * @return OutputPin
+     * @return \Pkj\Raspberry\PiFace\OutputPin
      * @throws IndexOutOfRangeException
      */
     public function getRelay($index)

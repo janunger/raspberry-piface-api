@@ -3,6 +3,7 @@
 namespace Pkj\Raspberry;
 
 use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
+use Pkj\Raspberry\PiFace\OutputPin;
 
 interface PiFace
 {
@@ -26,25 +27,25 @@ interface PiFace
     public function getInputPin($index);
 
     /**
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin[]
+     * @return OutputPin[]
      */
     public function getOutputPins();
 
     /**
      * @param int $index
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin
+     * @return OutputPin
      * @throws IndexOutOfRangeException
      */
     public function getOutputPin($index);
 
     /**
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin[]
+     * @return OutputPin[]
      */
     public function getRelays();
 
     /**
      * @param int $index
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin
+     * @return OutputPin
      * @throws IndexOutOfRangeException
      */
     public function getRelay($index);
