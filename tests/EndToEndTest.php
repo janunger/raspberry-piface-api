@@ -6,6 +6,10 @@ class EndToEndTest extends PHPUnit_Framework_TestCase
 {
     public function testEverything()
     {
+        if (!class_exists('Spi')) {
+            $this->markTestSkipped('SPI not installed');
+        }
+
         $device = PiFace::createInstance();
         $device->init();
 
