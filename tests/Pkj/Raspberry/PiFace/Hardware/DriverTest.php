@@ -2,8 +2,6 @@
 
 namespace Pkj\Raspberry\PiFace\Hardware;
 
-use Pkj\Raspberry\PiFace\Hardware\Driver;
-
 class DriverTest extends \PHPUnit_Framework_TestCase
 {
     protected function createSUT()

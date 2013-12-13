@@ -2,9 +2,6 @@
 
 namespace Pkj\Raspberry\PiFace\Hardware;
 
-use Pkj\Raspberry\PiFace\Hardware\Driver;
-use Pkj\Raspberry\PiFace\Hardware\PiFace;
-
 class PiFaceTest extends \PHPUnit_Framework_TestCase
 {
     /**

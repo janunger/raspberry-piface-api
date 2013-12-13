@@ -7,7 +7,7 @@ use Pkj\Raspberry\PiFace\Hardware\Components\OutputPin;
 use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
 use Pkj\Raspberry\PiFace\Hardware\SpiManager\SpiExtension;
 
-class PiFace
+class PiFace implements \Pkj\Raspberry\PiFace
 {
     const OUTPUT_PORT = Driver::GPIOA;
     const INPUT_PORT = Driver::GPIOB;
@@ -46,7 +46,7 @@ class PiFace
 
     /**
      * @param int $boardIndex
-     * @return \Pkj\Raspberry\PiFace\PiFace
+     * @return \Pkj\Raspberry\PiFace
      */
     public static function createInstance($boardIndex = 0)
     {
