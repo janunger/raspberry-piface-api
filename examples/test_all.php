@@ -13,24 +13,24 @@ if (!class_exists('\Spi')) {
 $dev = PiFace::createInstance();
 $dev->init();
 
-foreach ($dev->getRelays() as $relay) {
-    echo "Turning on relay: $relay\n";
+foreach ($dev->getRelays() as $key => $relay) {
+    echo "Turning on relay: $key\n";
     $relay->turnOn();
-    sleep(1);
-    echo "Turning off relay: $relay\n";
+    usleep(300000);
+    echo "Turning off relay: $key\n";
     $relay->turnOff();
-    sleep(1);
+    usleep(300000);
 }
 
-foreach ($dev->getLeds() as $led) {
-    echo "Turning on led: $led\n";
-    $led->turnOn();
-    sleep(1);
-    echo "Turning off led: $led\n";
-    $led->turnOff();
-    sleep(1);
+foreach ($dev->getOutputPins() as $key => $pin) {
+    echo "Turning on led: $key\n";
+    $pin->turnOn();
+    usleep(300000);
+    echo "Turning off led: $key\n";
+    $pin->turnOff();
+    usleep(300000);
 }
 
-foreach ($dev->getInputPins() as $inputPin) {
-    echo "Value of $inputPin is {$inputPin->getValue()}\n";
+foreach ($dev->getInputPins() as $key => $inputPin) {
+    echo "Value of input $key is " .  ($inputPin->isOn() ? 'on' : 'off') . "\n";
 }

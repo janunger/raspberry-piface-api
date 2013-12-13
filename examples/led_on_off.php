@@ -14,9 +14,9 @@ $dev = PiFace::createInstance();
 $dev->init();
 
 // Turn on the first led
-$dev->getLeds()[0]->turnOn();
+$dev->getOutputPin(7)->turnOn();
 
 sleep(2);
 
 // Turn off the first led
-$dev->getLeds()[0]->turnOff();
+$dev->getOutputPin(7)->turnOff();
