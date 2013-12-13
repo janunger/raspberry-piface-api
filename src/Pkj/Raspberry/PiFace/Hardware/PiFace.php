@@ -25,7 +25,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
     private $boardIndex;
 
     /**
-     * @var InputPin[]
+     * @var \Pkj\Raspberry\PiFace\InputPin[]
      */
     private $inputPins = array();
 
@@ -40,7 +40,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
     private $relays = array();
 
     /**
-     * @var InputPin[]
+     * @var \Pkj\Raspberry\PiFace\InputPin[]
      */
     private $switches = array();
 
@@ -123,7 +123,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
     }
 
     /**
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\InputPin[]
+     * @return \Pkj\Raspberry\PiFace\InputPin[]
      */
     public function getInputPins()
     {
@@ -132,7 +132,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
 
     /**
      * @param int $index
-     * @return InputPin
+     * @return \Pkj\Raspberry\PiFace\InputPin
      * @throws IndexOutOfRangeException
      */
     public function getInputPin($index)
@@ -189,7 +189,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
     }
 
     /**
-     * @return InputPin[]
+     * @return \Pkj\Raspberry\PiFace\InputPin[]
      */
     public function getSwitches()
     {
@@ -198,7 +198,7 @@ class PiFace implements \Pkj\Raspberry\PiFace
 
     /**
      * @param int $index
-     * @return \Pkj\Raspberry\PiFace\Hardware\Components\InputPin
+     * @return \Pkj\Raspberry\PiFace\InputPin
      * @throws IndexOutOfRangeException
      */
     public function getSwitch($index)

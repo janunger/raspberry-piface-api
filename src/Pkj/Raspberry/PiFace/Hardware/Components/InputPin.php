@@ -4,7 +4,7 @@ namespace Pkj\Raspberry\PiFace\Hardware\Components;
 
 use Pkj\Raspberry\PiFace\Hardware\PiFace;
 
-class InputPin extends Pin
+class InputPin extends Pin implements \Pkj\Raspberry\PiFace\InputPin
 {
     /**
      * @return bool
