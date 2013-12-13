@@ -1,8 +1,9 @@
 <?php
 
-namespace Pkj\Raspberry\PiFace;
+namespace Pkj\Raspberry\PiFace\Hardware;
 
-use Pkj\Raspberry\PiFace\SpiManager\SpiInterface;
+use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
+use Pkj\Raspberry\PiFace\Hardware\SpiManager\SpiInterface;
 
 /**
  * Provides common I/O methods for interfacing with PiFace Products
@@ -61,7 +62,7 @@ class Driver
     const SPIDEV = '/dev/spidev';
 
     /**
-     * @var \Pkj\Raspberry\PiFace\SpiManager\SpiInterface
+     * @var \Pkj\Raspberry\PiFace\Hardware\SpiManager\SpiInterface
      */
     private $spi;
 

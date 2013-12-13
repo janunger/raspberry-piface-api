@@ -1,6 +1,9 @@
 <?php
 
-namespace Pkj\Raspberry\PiFace;
+namespace Pkj\Raspberry\PiFace\Hardware;
+
+use Pkj\Raspberry\PiFace\Hardware\Driver;
+use Pkj\Raspberry\PiFace\Hardware\PiFace;
 
 class PiFaceTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,7 +12,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
      */
     private function createDriverMock()
     {
-        $spi = $this->getMock('Pkj\Raspberry\PiFace\SpiManager\SpiInterface');
+        $spi = $this->getMock('Pkj\Raspberry\PiFace\Hardware\SpiManager\SpiInterface');
 
         return new Driver($spi);
     }
@@ -36,7 +39,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(8, $sut->getInputPins());
         foreach ($sut->getInputPins() as $inputPin) {
-            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\InputPin', $inputPin);
+            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\InputPin', $inputPin);
         }
     }
 
@@ -46,7 +49,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(8, $sut->getOutputPins());
         foreach ($sut->getOutputPins() as $outputPin) {
-            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\OutputPin', $outputPin);
+            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\OutputPin', $outputPin);
         }
     }
 
@@ -56,7 +59,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(2, $sut->getRelays());
         foreach ($sut->getRelays() as $relay) {
-            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\OutputPin', $relay);
+            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\OutputPin', $relay);
         }
 
         $this->assertCount(4, $sut->getSwitches());
@@ -68,7 +71,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(4, $sut->getSwitches());
         foreach ($sut->getSwitches() as $switch) {
-            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\InputPin', $switch);
+            $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\InputPin', $switch);
         }
     }
 
@@ -76,7 +79,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     {
         foreach (range(0, PiFace::MAX_BOARDS - 1) as $boardIndex) {
             $sut = new PiFace($this->createDriverMock(), $boardIndex);
-            $this->assertInstanceOf('Pkj\Raspberry\PiFace\PiFace', $sut);
+            $this->assertInstanceOf('Pkj\Raspberry\PiFace\Hardware\PiFace', $sut);
         }
     }
 
@@ -84,7 +87,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     {
         $sut = new PiFace($this->createDriverMock());
 
-        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\InputPin', $sut->getInputPin(0));
+        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\InputPin', $sut->getInputPin(0));
     }
 
     /**
@@ -111,7 +114,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     {
         $sut = new PiFace($this->createDriverMock());
 
-        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\OutputPin', $sut->getOutputPin(0));
+        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\OutputPin', $sut->getOutputPin(0));
     }
 
     /**
@@ -138,7 +141,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     {
         $sut = new PiFace($this->createDriverMock());
 
-        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\OutputPin', $sut->getRelay(0));
+        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\OutputPin', $sut->getRelay(0));
     }
 
     /**
@@ -165,7 +168,7 @@ class PiFaceTest extends \PHPUnit_Framework_TestCase
     {
         $sut = new PiFace($this->createDriverMock());
 
-        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Components\InputPin', $sut->getSwitch(0));
+        $this->assertInstanceOf('\Pkj\Raspberry\PiFace\Hardware\Components\InputPin', $sut->getSwitch(0));
     }
 
     /**

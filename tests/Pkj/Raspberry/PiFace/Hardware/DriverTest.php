@@ -1,12 +1,14 @@
 <?php
 
-namespace Pkj\Raspberry\PiFace;
+namespace Pkj\Raspberry\PiFace\Hardware;
+
+use Pkj\Raspberry\PiFace\Hardware\Driver;
 
 class DriverTest extends \PHPUnit_Framework_TestCase
 {
     protected function createSUT()
     {
-        $spi = $this->getMock('Pkj\Raspberry\PiFace\SpiManager\SpiInterface');
+        $spi = $this->getMock('Pkj\Raspberry\PiFace\Hardware\SpiManager\SpiInterface');
 
         return new Driver($spi);
     }
@@ -33,7 +35,11 @@ class DriverTest extends \PHPUnit_Framework_TestCase
 
     public function testWrite()
     {
-        $spi = $this->getMock('Pkj\Raspberry\PiFace\SpiManager\FileSpiManager', array('transfer'), array(0, 0));
+        $spi = $this->getMock(
+            'Pkj\Raspberry\PiFace\Hardware\SpiManager\FileSpiManager',
+            array('transfer'),
+            array(0, 0)
+        );
 
         $sut = new Driver($spi);
 
@@ -52,7 +58,11 @@ class DriverTest extends \PHPUnit_Framework_TestCase
 
     public function testRead()
     {
-        $spi = $this->getMock('Pkj\Raspberry\PiFace\SpiManager\FileSpiManager', array('transfer'), array(0, 0));
+        $spi = $this->getMock(
+            'Pkj\Raspberry\PiFace\Hardware\SpiManager\FileSpiManager',
+            array('transfer'),
+            array(0, 0)
+        );
 
         $c = new Driver($spi);
 

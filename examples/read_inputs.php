@@ -1,6 +1,6 @@
 <?php
 
-use Pkj\Raspberry\PiFace\PiFace;
+use Pkj\Raspberry\PiFace\Hardware\PiFace;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

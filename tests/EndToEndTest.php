@@ -1,6 +1,6 @@
 <?php
 
-use Pkj\Raspberry\PiFace\PiFace;
+use Pkj\Raspberry\PiFace\Hardware\PiFace;
 
 class EndToEndTest extends PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,8 @@
 <?php
 
-namespace Pkj\Raspberry\PiFace\SpiManager;
+namespace Pkj\Raspberry\PiFace\Hardware\SpiManager;
+
+use int;
 
 interface SpiInterface
 {

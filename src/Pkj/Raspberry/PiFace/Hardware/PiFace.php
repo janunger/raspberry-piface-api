@@ -1,10 +1,11 @@
 <?php
 
-namespace Pkj\Raspberry\PiFace;
+namespace Pkj\Raspberry\PiFace\Hardware;
 
-use Pkj\Raspberry\PiFace\Components\InputPin;
-use Pkj\Raspberry\PiFace\Components\OutputPin;
-use Pkj\Raspberry\PiFace\SpiManager\SpiExtension;
+use Pkj\Raspberry\PiFace\Hardware\Components\InputPin;
+use Pkj\Raspberry\PiFace\Hardware\Components\OutputPin;
+use Pkj\Raspberry\PiFace\IndexOutOfRangeException;
+use Pkj\Raspberry\PiFace\Hardware\SpiManager\SpiExtension;
 
 class PiFace
 {
@@ -122,7 +123,7 @@ class PiFace
     }
 
     /**
-     * @return InputPin[]
+     * @return \Pkj\Raspberry\PiFace\Hardware\Components\InputPin[]
      */
     public function getInputPins()
     {
@@ -144,7 +145,7 @@ class PiFace
     }
 
     /**
-     * @return OutputPin[]
+     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin[]
      */
     public function getOutputPins()
     {
@@ -153,7 +154,7 @@ class PiFace
 
     /**
      * @param int $index
-     * @return OutputPin
+     * @return \Pkj\Raspberry\PiFace\Hardware\Components\OutputPin
      * @throws IndexOutOfRangeException
      */
     public function getOutputPin($index)
@@ -197,7 +198,7 @@ class PiFace
 
     /**
      * @param int $index
-     * @return InputPin
+     * @return \Pkj\Raspberry\PiFace\Hardware\Components\InputPin
      * @throws IndexOutOfRangeException
      */
     public function getSwitch($index)

@@ -1,7 +1,7 @@
 <?php
 
-use Pkj\Raspberry\PiFace\Driver;
-use Pkj\Raspberry\PiFace\PiFace;
+use Pkj\Raspberry\PiFace\Hardware\Driver;
+use Pkj\Raspberry\PiFace\Hardware\PiFace;
 
 require __DIR__ . '/../vendor/autoload.php';
 
